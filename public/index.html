@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ $nfcCard->nombre }} | Mi Tarjeta Virtual</title>
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DHg8p4v9Qz2+rJLX0CKV4PDip/ELOOvJnYFiTRGvV2G9+8Z1Y4jgmh1XIH0BvIx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-4+HfNB6zHYjzq2KAkG38Do4JYjC0pE29z34k2c96fql1OQq3p18FczELbAUPkRNd" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
+    <!-- Fontawesome icon -->
+    <script src="https://kit.fontawesome.com/ec1c9da28d.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+  <div class="circle-container">
+    <img src="img/qr.png" alt="">
+  </div>
+    
+  <div id="fondo-gris"></div>
+  <div id="fondo-azul"></div>
+
+
+    
+
+
+<!--Inicio-->    
+<header>  
+  <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+    style="height: 100%; width: 100%;">
+        <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+            style="stroke: none; fill: #d5d5d5;"></path>
+  </svg></div>
+</header>
+
+<main>
+    <section class="contenedor sobre-nosotros">
+        <h2 class="titulo">{{ $nfcCard->nombre }}</h2>  
+      <div class="line"></div>
+        <p class="segundo-titulo">{{ $nfcCard->cargo }} {{ $nfcCard->ciudad }}</p>
+      </div>
+    </section><!--Inicio Fin-->
+
+<!--Redes-->
+<section>
+    <div class="social-menu">
+        <ul class="social-icons">
+            <li><a href="tel:+57{{ $nfcCard->telefono }}"><i class="fa-solid fa-phone"></i><span>Llamar</span></a></li>
+            <li><a href="https://web.whatsapp.com/send?phone=57{{ $nfcCard->telefono }}"><i class="fa-brands fa-whatsapp"></i><span>Escribir</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-share"></i><span>Compartir</span></a></li>
+            <!-- Modal Contacto -->
+            <li>
+                <a href="#open-modal-contacto" class="btn">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Contacto</span>
+                </a>
+            </li><!-- Fin Modal Contacto -->
+            <li><a href="mailto:{{ $nfcCard->correo }}"><i class="fa-solid fa-envelope"></i><span>Correo</span></a></li>
+            <!-- Modal Qr -->
+            <li><div class="container">
+                <div class="interior">
+                  <a class="btn" href="#open-modal"><i class="fa-solid fa-qrcode"></i><span>Código QR</span></a>
+                </div>
+              </div> </li>
+            <li><a href="#" title="Close" class="modal-close"></a></li><!-- Fin Modal Qr -->
+        </ul>
+    </div>
+</section><!--Redes Fin-->
+
+<footer>
+    
+  <h2 class="titulo-final">&copy; Copyright 2024 <a href="https://tecsersas.com" style="position: relative; z-index: 999;">TECSER S.A.S</a>. All Rights Reserved</h2>
+
+</footer>
+
+<!-- Modal Qr -->
+  <div id="open-modal" class="modal-window">
+  <div>
+    <a href="#" title="Close" class="modal-close">Cerrar</a>
+
+        <h1>Este es el QR de tu página</h1>
+
+    <div><img class="recuadro" src="img/qr.png" alt=""></div>      
+        <br>
+   </div>
+  </div><!-- Fin Modal Qr-->
+
+<!-- Modal Contacto -->
+<div id="open-modal-contacto" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">Cerrar</a>
+            <h1>Contactos</h1>
+            <p>Número</p>
+            <p>{{ $nfcCard->telefono_opc }}</p>
+            <p>{{ $nfcCard->telefono_opci }}</p>
+            <p>Correo</p>
+            <p>{{ $nfcCard->correo_opc }}</p>
+            <p>Páginas</p>
+            <p>{{ $nfcCard->pagina }}</p>
+            <p>{{ $nfcCard->pagina_opc }}</p>
+            <br>
+        </div>
+    </div><!-- Fin Modal Contacto-->
+</body>
+</html>
