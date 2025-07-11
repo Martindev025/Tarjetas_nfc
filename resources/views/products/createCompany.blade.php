@@ -1,3 +1,5 @@
+
+
 <div class="modal fade" id="{{ $isEdit && $company ? 'editCompanyModal' . $company->id : 'createCompanyModal' }}" tabindex="-1" aria-labelledby="companyModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

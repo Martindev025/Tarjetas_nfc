@@ -15,9 +15,14 @@ class Product extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    
+
     public function nfcCards()
     {
         return $this->belongsToMany(NfcCard::class, 'products_nfc_cards');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 }

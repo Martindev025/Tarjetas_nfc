@@ -42,94 +42,97 @@ class NfcCardController extends Controller
     }
     
     // Almacenamiento de datos y solicitudes
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|string|max:255|unique:nfc_cards,nombre',
-            'ciudad' => 'required|string',
-            'celular' => 'required|string|max:255',
-            'telefono_opc' => 'nullable|max:255',
-            'telefono_opci' => 'nullable|max:255',
-            'cargo' => 'required|string|max:255',
-            'correo' => 'required|email|max:255',
-            'correo_opc' => 'nullable|max:255',
-            'pagina' => 'nullable|max:255',
-            'pagina_opc' => 'nullable|max:255',
-            'pagina_opcional' => 'nullable|max:255',
-            'empresa' => 'required|string|max:255',
-            'feature' => 'nullable|max:1024', 
-            'event_id' => 'required|exists:events,id',
-            'product_ids' => 'required|array',
-            'product_ids.*' => 'exists:products,id',
-        ], [
-            'nombre.unique' => 'El nombre ya esta registrado. Por favor, elige otro nombre.'
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255|unique:nfc_cards,nombre',
+        'ciudad' => 'required|string',
+        'celular' => 'required|string|max:255',
+        'telefono_opc' => 'nullable|max:255',
+        'telefono_opci' => 'nullable|max:255',
+        'cargo' => 'required|string|max:255',
+        'correo' => 'required|email|max:255',
+        'correo_opc' => 'nullable|max:255',
+        'pagina' => 'nullable|max:255',
+        'pagina_opc' => 'nullable|max:255',
+        'pagina_opcional' => 'nullable|max:255',
+        'empresa' => 'required|string|max:255',
+        'feature' => 'nullable|max:1024',
+        'event_id' => 'required|exists:events,id',
+        'product_ids' => 'required|array',
+        'product_ids.*' => 'exists:products,id',
+    ], [
+        'nombre.unique' => 'El nombre ya está registrado. Por favor, elige otro nombre.'
+    ]);
 
-        $nfcCard = new NfcCard();
-        $nfcCard->nombre = $request->nombre;
-        $nfcCard->ciudad = $request->ciudad;
-        $nfcCard->celular = $request->celular;
-        $nfcCard->telefono_opc = $request->telefono_opc;
-        $nfcCard->telefono_opci = $request->telefono_opci;
-        $nfcCard->cargo = $request->cargo;  
-        $nfcCard->correo = $request->correo;
-        $nfcCard->correo_opc = $request->correo_opc;
-        $nfcCard->pagina = $request->pagina;
-        $nfcCard->pagina_opc = $request->pagina_opc;
-		$nfcCard->pagina_opcional = $request->pagina_opcional; 
-		$nfcCard->empresa = $request->empresa; 
-        $nfcCard->feature = $request->feature; 
-        $nfcCard->event_id = $request->event_id;
+    $nfcCard = new NfcCard();
+    $nfcCard->nombre = $request->nombre;
+    $nfcCard->ciudad = $request->ciudad;
+    $nfcCard->celular = $request->celular;
+    $nfcCard->telefono_opc = $request->telefono_opc;
+    $nfcCard->telefono_opci = $request->telefono_opci;
+    $nfcCard->cargo = $request->cargo;
+    $nfcCard->correo = $request->correo;
+    $nfcCard->correo_opc = $request->correo_opc;
+    $nfcCard->pagina = $request->pagina;
+    $nfcCard->pagina_opc = $request->pagina_opc;
+    $nfcCard->pagina_opcional = $request->pagina_opcional;
+    $nfcCard->empresa = $request->empresa;
+    $nfcCard->feature = $request->feature;
+    $nfcCard->event_id = $request->event_id;
 
-        
-        if ($request->hasFile('feature')){
-            $request->file('featureds');
-            $destinationPath = ('storage/featureds');
-            $filename = str_replace(' ', '_', ($nfcCard->nombre)) .'.png';
-            $uploadSuccess = $request->file('feature')->move($destinationPath, $filename);
-           $nfcCard->feature = Str::finish($destinationPath, '/') . $filename;
-
-            $carpeta = public_path('storage/featureds/');
-            $ruta_archivo = $carpeta . DIRECTORY_SEPARATOR . $filename;
-        }
-
-        $nfcCard->save();
-
-        // Adjuntar los productos seleccionados al NfcCard
-        $productIds = $request->product_ids;
-        $nfcCard->products()->attach($productIds);
-        
-        // Generacion y almacenamiento de QR
-        $qrCodeController = new QRCodeController();
-        $qrCodeController->generateQRCode($nfcCard->id, $nfcCard->nombre); // Llama al método para generar el código QR
-
-        // Generacion la plantilla HTML
-        $html = view('plantilla')->with('nfcCard', $nfcCard)->render();
-
-        $nombre_archivo = str_replace(' ', '_', strtolower($nfcCard->nombre)) . '.html';
-        $carpeta = public_path('storage/users');
-        $ruta_archivo = $carpeta . DIRECTORY_SEPARATOR . $nombre_archivo;
-        file_put_contents($ruta_archivo, $html);
-
-        // Validacion del segundo HTML
-        $printCardsController = new PrintCardsController();
-        $printCardsController->generateAndDownload($nfcCard); 
-
-        // Crear archivo VCF
-        $vcfFilename = ($nfcCard->nombre) . '.vcf';
-        $vcfContent = "BEGIN:VCARD\nVERSION:3.0\nFN:{$nfcCard->nombre}\nTEL:{$nfcCard->celular}\nEMAIL:{$nfcCard->correo}\nEND:VCARD";
-        $vcfFilePath = public_path('storage/contacts/' . $vcfFilename);
-
-        if (!file_exists(public_path('storage/contacts'))) {
-        mkdir(public_path('storage/contacts'), 0777, true);
-        }
-
-    file_put_contents($vcfFilePath, $vcfContent);
-
-       session()->flash('success', 'La tarjeta fue creada correctamente.');
-
-    return redirect()->route('events.nfc-cards', ['event' => $nfcCard->event_id]);
+    if ($request->hasFile('feature')) {
+        $destinationPath = 'storage/featureds';
+        $filename = str_replace(' ', '_', $nfcCard->nombre) . '.png';
+        $request->file('feature')->move($destinationPath, $filename);
+        $nfcCard->feature = Str::finish($destinationPath, '/') . $filename;
     }
+
+    $nfcCard->save();
+
+    // Adjuntar productos
+    $nfcCard->products()->attach($request->product_ids);
+
+    // Generar QR
+    $qrCodeController = new QRCodeController();
+    $qrCodeController->generateQRCode($nfcCard->id, $nfcCard->nombre);
+
+    // Crear HTML
+    $html = view('plantilla', [
+        'nfcCard' => $nfcCard,
+        'products' => $nfcCard->products,
+    ])->render();
+
+    $nombre_archivo = str_replace(' ', '_', strtolower($nfcCard->nombre)) . '.html';
+    $carpeta = public_path('storage/users');
+
+    // ✅ Crear carpeta si no existe
+    if (!file_exists($carpeta)) {
+        mkdir($carpeta, 0777, true);
+    }
+
+    $ruta_archivo = $carpeta . DIRECTORY_SEPARATOR . $nombre_archivo;
+    file_put_contents($ruta_archivo, $html);
+
+    // Generar segunda plantilla (PDF o similar)
+    $printCardsController = new PrintCardsController();
+    $printCardsController->generateAndDownload($nfcCard);
+
+    // Crear archivo VCF
+    $vcfFilename = $nfcCard->nombre . '.vcf';
+    $vcfContent = "BEGIN:VCARD\nVERSION:3.0\nFN:{$nfcCard->nombre}\nTEL:{$nfcCard->celular}\nEMAIL:{$nfcCard->correo}\nEND:VCARD";
+    $vcfFolder = public_path('storage/contacts');
+
+    if (!file_exists($vcfFolder)) {
+        mkdir($vcfFolder, 0777, true);
+    }
+
+    file_put_contents($vcfFolder . DIRECTORY_SEPARATOR . $vcfFilename, $vcfContent);
+
+    session()->flash('success', 'La tarjeta fue creada correctamente.');
+    return redirect()->route('events.nfc-cards', ['event' => $nfcCard->event_id]);
+}
+
 
     //Generacion y Almacenamineto print_card
     public function generateSecondHtml(NfcCard $nfcCard)

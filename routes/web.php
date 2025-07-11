@@ -25,6 +25,9 @@ use App\Http\Controllers\CompanyController;
 Route::get('lang/{locale}', [lenguajeController::class, 'setLocale'])->name('setLocale');
 /* Fin Languaje */
 
+Route::get('/preview-template', [NfcCardController::class, 'previewTemplate']);
+
+Route::get('/products/{empresa}/products', [ProductController::class, 'showByCompany'])->name('products.byCompany');
 Route::get('/', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
