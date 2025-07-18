@@ -33,7 +33,7 @@
         <div class="row justify-content-center col-md-10">
             <section class="d-flex align-items-center justify-content-between mb-3">
                 <div>
-                    <h2 style="margin:0; font-weight:700; color:#222; letter-spacing:1px;">EVENTOS</h2>
+                    <h2 style="margin:0; font-weight:700; color:#222; letter-spacing:1px;">{{ trans('messages.index-event.title1') }}</h2>
                     <div class="card-event">{{ trans('messages.index-event.title') }}</div>
                 </div>
                 <div class="d-flex gap-2">
@@ -45,7 +45,7 @@
 
                     <a href="{{ route('products.index') }}" class="btnf btn__fil custom-action-btn">
                         <i class="fa-solid fa-building" style="margin-right: 6px;"></i>
-                        empresas y productos
+                       {{ trans('messages.index-event.empresa') }}
                     </a>
 
 

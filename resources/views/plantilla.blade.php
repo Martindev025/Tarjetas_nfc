@@ -83,8 +83,8 @@
     }
 
     .profile-pic {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
         border-radius: 50%;
         object-fit: cover;
         margin-right: 30px;
@@ -137,17 +137,12 @@
         gap: 30px;
     }
 
-    .icon-bar img {
-        width: 48px;
-        height: 48px;
-        transition: transform 0.2s;
+    .icon-bar a {
+        color: #333;
+        font-size: 40px;
+        text-decoration: none;
+        transition: color 0.3s ease;
     }
-
-    .icon-bar img:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-
 
     .product-card img {
         height: 250px;
@@ -165,7 +160,7 @@
     <!-- ✅ HEADER A TODO EL ANCHO -->
     <div class="card-header">
         <div class="user-info">
-            <img class="profile-pic" src="{{ asset('storage/profile/' . $nfcCard->foto) }}" alt="Foto">
+            <img class="profile-pic" src="{{ $nfcCard->foto_url }}" alt="Foto de {{ $nfcCard->nombre }}">
             <div>
                 <h1>{{ $nfcCard->nombre }}</h1>
                 <p>{{ $nfcCard->cargo }}</p>
@@ -178,58 +173,110 @@
     <div class="card-container">
         <div class="card-left">
             <div class="icon-bar">
-                <a href="{{ $nfcCard->pdf_url }}"><img src="{{ asset('img/pdf.png') }}" alt="PDF"></a>
-                <a href="https://wa.me/57{{ $nfcCard->celular }}"><img src="{{ asset('img/whatsapp.png') }}"
-                        alt="WhatsApp"></a>
-                <a href="mailto:{{ $nfcCard->correo }}"><img src="{{ asset('img/email.png') }}" alt="Email"></a>
+               <a href="#" id="download-btn" class="btn"><i class="fa-solid fa-file-pdf"></i><span data-translate="export"></span></a>
+                <a href="https://wa.me/57{{ $nfcCard->celular }}"><i class="fa-solid fa-share"></i></a>
+                <a href="mailto:{{ $nfcCard->correo }}"><i class="fa-solid fa-envelope"></i></a>
+              
             </div>
         </div>
 
         <div class="card-right">
             <div class="card-body">
+                <h2>Información: </h2>
                 <div class="info-row"><i class="fa-solid fa-phone"></i> {{ $nfcCard->celular }}</div>
                 <div class="info-row"><i class="fa-solid fa-envelope"></i> {{ $nfcCard->correo }}</div>
-                <div class="info-row"><i class="fa-solid fa-location-dot"></i> {{ $nfcCard->direccion }}</div>
+                <div class="info-row"><i class="fa-solid fa-location-dot"></i> {{ $nfcCard->ciudad }}</div>
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-light py-5">
-  <h2 class="text-center mb-4">Productos de Interés</h2>
+    <div class="container-fluid bg-light py-5 " style="background-color: #7a7c7e;">
+        <h2 class="text-center mb-4">Productos de Interés</h2>
 
-  @if($nfcCard->products->isNotEmpty())
-    <!-- Contenedor centrado -->
-    <div class="container px-0">
-      <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        @php
+            // Solo las imágenes de productos que tienen imágenes
+            $productImages = collect();
 
-          @foreach($nfcCard->products->chunk(3) as $chunk)
-            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-              <div class="row g-2">
-                @foreach($chunk as $product)
-                  <div class="col-md-4">
-                    <img src="{{ asset('storage/products/' . $product->imagen) }}" class="d-block w-100 product-img" alt="{{ $product->nombre }}">
-                  </div>
-                @endforeach
-              </div>
+            foreach ($nfcCard->products as $product) {
+                if ($product->images->isNotEmpty()) {
+                    foreach ($product->images as $image) {
+                        $productImages->push([
+                            'image_path' => $image->image_path,
+                            'product_name' => $product->name,
+                        ]);
+                    }
+                }
+            }
+        @endphp
+
+        @if ($productImages->isNotEmpty())
+            <div class="container px-0 position-relative">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($productImages->chunk(3) as $chunk)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                <div class="row justify-content-center g-4 px-4">
+                                    @foreach ($chunk as $img)
+                                        <div class="col-md-4">
+                                            <div class="card h-100 shadow-sm">
+                                                <img src="{{ asset('storage/' . $img['image_path']) }}"
+                                                    class="card-img-top rounded" alt="{{ $img['product_name'] }}"
+                                                    style="object-fit: cover; height: 200px;">
+                                                <div class="card-body text-center">
+                                                    <h6 class="card-title mb-0">{{ $img['product_name'] }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Controles -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
             </div>
-          @endforeach
-
-        </div>
-
-        <!-- Controles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
-      </div>
+        @endif
     </div>
-  @else
-    <p class="text-center text-muted">Este contacto aún no tiene productos de interés asignados.</p>
-  @endif
-</div>
+    <div id="open-modal" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close" data-translate="close"></a>
 
+            <h1 data-translate="txtqr"></h1>
+
+            <div><img class="recuadro" src="../../../storage/app/public/qrcodes/{{ $nfcCard->id }}.png"
+                    alt=""></div>
+            <br>
+        </div>
+    </div><!-- Fin Modal Qr-->
+    <div id="open-modal-contacto" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close" data-translate="close"></a>
+            <h1 data-translate="modalcon"></h1>
+            <h1 data-translate="phonecon"></h1>
+            <p>{{ $nfcCard->celular }}</p>
+            <h1 data-translate="mailcon"></h1>
+            <p>{{ $nfcCard->correo }}</p>
+            <br>
+        </div>
+    </div>
+
+
+    <footer>
+  <div>
+    <img src="../../img/espana.png" alt="Spanish" class="lenguage-spa" onclick="changeLanguage('es')">
+    <img src="../../img/ingles.png" alt="English" class="lenguage-eng" onclick="changeLanguage('en')">
+
+    <h2 class="titulo-final">&copy; Copyright 2025 <a href="https://tecsersas.com" style="position: relative; z-index: 999;">TECSER S.A.S</a>. All Rights Reserved</h2>
+  </div>
+</footer>
 
 
 

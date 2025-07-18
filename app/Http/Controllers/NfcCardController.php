@@ -307,7 +307,7 @@ public function generateHtmlFile(NfcCard $nfcCard)
     file_put_contents($ruta_archivo, $html);
 }
 
-//Logica de exportacion excel
+
 //Logica de exportacion excel
 public function exportarExcel($eventId)
 {

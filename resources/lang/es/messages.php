@@ -11,8 +11,8 @@ return [
     ],
 
     'header' => [
-        'title' => 'GESTION DE TARJETAS.',
-        'subtitle' => 'GESTION DE TARJETAS.',
+        'title' => 'GESTIÓN DE TARJETAS',
+        'subtitle' => 'GESTIÓN DE TARJETAS',
         'text' => 'Tarjetas NFC',
         'es' => 'Español',
         'en' => 'Ingles',
@@ -21,8 +21,8 @@ return [
     ],
 
     'attributes' => [
-    'ciudad' => 'ciudad',
-],
+        'ciudad' => 'ciudad',
+    ],
 
     'index' => [
         'title' => 'Listado de Tarjetas',
@@ -88,7 +88,7 @@ return [
         'title' => 'Agregar Tarjeta',
         'city' => 'Ciudad - Municipio:',
         'name' => 'Nombre:',
-        'position' => 'Cargo:', 
+        'position' => 'Cargo:',
         'phone' => 'Celular:',
         'e-mail' => 'Correo electrónico:',
         'phone-second' => 'Teléfono 2 (Opcional):',
@@ -105,27 +105,29 @@ return [
     ],
 
     'create-event' => [
-        'title' => 'Crear Evento',
-        'name' => 'Nombre del Evento:',
-        'date' => 'Fecha del evento',  
-        'company' => 'Selecciona la(s) empresa(s)',  
-        'company-inter' => 'Selecciona la(s) empresa(s)',  
-        'template' => 'Selecciona la plantilla',  
-        'template-first' => 'Plantilla 1',  
-        'template-second' => 'Plantilla 2',  
-        'save' => 'Guardar',  
+        'title' => 'Crear Proyecto',
+        'name' => 'Nombre del proyecto:',
+        'date' => 'Fecha del proyecto',
+        'company' => 'Selecciona la(s) empresa(s)',
+        'company-inter' => 'Selecciona la(s) empresa(s)',
+        'template' => 'Selecciona la plantilla',
+        'template-first' => 'Plantilla 1',
+        'template-second' => 'Plantilla 2',
+        'save' => 'Guardar',
     ],
 
     'edit-event' => [
         'title' => 'Editar Evento',
         'name' => 'Nombre del Evento:',
-        'update' => 'Actualizar', 
+        'update' => 'Actualizar',
         'date' => 'Fecha'
     ],
 
     'index-event' => [
-        'title' => 'Selecciona tu Evento',
-        'subtitle' => 'Crear nuevo evento',
+        'title1' => 'PROYECTOS',
+        'title' => 'Selecciona tu proyecto',
+        'subtitle' => 'Crear nuevo Proyecto',
+        'empresa' => 'Empresas y productos',
         'name' => 'Nombre',
         'date' => 'Fecha',
         'actions' => 'Acciones',
