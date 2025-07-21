@@ -40,17 +40,17 @@
     <div class="admin-header">
         <!-- Título a la izquierda -->
         <div class="admin-title">
-            <h2 class="fw-bold text-dark mb-1">ADMINISTRACIÓN</h2>
-            <p class="lead mb-0">Empresas y productos disponibles</p>
+            <h2 class="fw-bold text-dark mb-1">@lang('messages.companies.title')</h2>
+            <p class="lead mb-0">@lang('messages.companies.subtitle')</p>
         </div>
 
         <!-- Botones a la derecha -->
         <div class="admin-buttons">
             <button class="btnf btn__fil custom-action-btn" data-bs-toggle="modal" data-bs-target="#createCompanyModal">
-                <i class="fas fa-building me-1"></i> Nueva Empresa
+                <i class="fas fa-building me-1"></i> @lang('messages.companies.new_company')
             </button>
             <button class="btnf btn__fil custom-action-btn" data-bs-toggle="modal" data-bs-target="#createProductModal">
-                <i class="fas fa-plus-circle me-1"></i> Nuevo Producto
+                <i class="fas fa-plus-circle me-1"></i> @lang('messages.companies.new_product')
             </button>
         </div>
     </div>
@@ -62,15 +62,15 @@
         <div class="col-12">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white py-3">
-                    <h4 class="mb-0 text-center">Empresas</h4>
+                    <h4 class="mb-0 text-center">@lang('messages.companies.companies_table_title')</h4>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0" id="companiesTable">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th class="text-center">Acciones</th>
+                                    <th>@lang('messages.companies.company_name')</th>
+                                    <th class="text-center">@lang('messages.companies.actions')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,7 +85,7 @@
                                             <div class="d-flex justify-content-center gap-2">
 
                                                 <a href="{{ route('products.byCompany', $company->id) }}"
-                                                    title="Ver productos de esta empresa">
+                                                    title="@lang('messages.companies.view_products')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         fill="currentColor" color="black" class="bi bi-eye-fill"
                                                         viewBox="0 0 16 16">

@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:products,name',
             'company_id' => 'required|exists:companies,id',
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
@@ -83,7 +83,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:products,name,' . $product->id,
             'company_id' => 'required|exists:companies,id'
         ]);
 

@@ -140,4 +140,22 @@ return [
         'clear-filter' => 'Limpiar Filtro',
     ],
 
+    'companies'=>[
+    'title' => 'ADMINISTRACIÓN',
+    'subtitle' => 'Empresas y productos disponibles',
+    'new_company' => 'Nueva Empresa',
+    'new_product' => 'Nuevo Producto',
+    'companies_table_title' => 'Empresas',
+    'company_name' => 'Nombre',
+    'actions' => 'Acciones',
+    'view_products' => 'Ver productos de esta empresa',
+    'edit_company' => 'Editar empresa',
+    'delete_company' => 'Eliminar empresa',
+    'delete_confirmation_title' => '¿Estás seguro?',
+    'delete_confirmation_text' => '¿Deseas eliminar la empresa ":name"?',
+    'delete_button' => 'Sí, eliminar',
+    'cancel_button' => 'Cancelar',
+    'success_message_ok' => 'OK',
+]
+
 ];

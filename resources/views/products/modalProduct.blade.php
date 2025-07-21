@@ -44,7 +44,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="images" class="form-label">Imágenes del Producto (máx 10)</label>
-                        <input class="form-control" type="file" id="images" name="images[]" accept="image/*"
+                        <input class="form-control2" type="file" id="images" name="images[]" accept="image/*"
                             multiple>
                         <small class="text-muted">Puedes subir hasta 10 imágenes</small>
                     </div>

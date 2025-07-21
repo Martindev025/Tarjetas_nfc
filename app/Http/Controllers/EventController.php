@@ -18,26 +18,26 @@ class EventController extends Controller
     return view('events.create', compact('companies'));
 }
     
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'template' => 'required|string|max:255', 
-            'companies' => 'required|array', 
-            'companies.*' => 'exists:companies,id',
-        ]);
+  public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255|unique:events,name',
+        'fecha' => 'required|date',
+        'template' => 'required|string|max:255',
+        'companies' => 'required|array',
+        'companies.*' => 'exists:companies,id',
+    ]);
 
-        $event = new Event();
-        $event->name = $request->input('name');
-        $event->fecha = $request->input('fecha');
-        $event->template = $request->input('template'); 
-        $event->save();
+    $event = new Event();
+    $event->name = $request->input('name');
+    $event->fecha = $request->input('fecha');
+    $event->template = $request->input('template');
+    $event->save();
 
-        $event->companies()->attach($request->companies);
-    
-        return redirect()->route('events.index')->with('success', 'Evento creado correctamente.');
-    }
+    $event->companies()->attach($request->companies);
+
+    return redirect()->route('events.index')->with('success', 'Evento creado correctamente.');
+}
 
     // Método para mostrar la lista de eventos
  public function index(Request $request)
@@ -76,7 +76,7 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:events,name',
             'fecha' => 'required|date',
         ]);
         $event->name = $request->name;
