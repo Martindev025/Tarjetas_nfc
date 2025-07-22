@@ -154,7 +154,54 @@ return [
     'delete_button' => 'Yes, delete',
     'cancel_button' => 'Cancel',
     'success_message_ok' => 'OK',
-]
+    ],
+
+'products' => [
+    'title' => 'PRODUCTS FROM:',
+    'no_products' => 'There are no products registered for this company.',
+    'products_header' => 'Products',
+    'table_name' => 'Name',
+    'table_images' => 'Images',
+    'table_actions' => 'Actions',
+    'back_button' => '← Back',
+    'new_product_button' => 'New Product',
+    'images_modal_title' => 'Images of',
+    'no_images_text' => 'There are no images for this product.',
+    'carousel_prev' => 'Previous',
+    'carousel_next' => 'Next',
+    'delete_confirm_title' => 'Are you sure?',
+    'delete_confirm_text' => 'You are about to delete',
+    'delete_confirm_button' => 'Yes, delete',
+    'delete_cancel_button' => 'Cancel',
+    'success_message' => '✅ Operation completed successfully',
+],
+ 
+    'modalsCompany' => [
+        'edit_title' => 'Edit Company',
+        'create_title' => 'Create Company',
+        'company_name_label' => 'Company Name',
+        'close_button' => 'Close',
+        'cancel_button' => 'Cancel',
+        'update_button' => 'Update',
+        'save_button' => 'Save'
+    ],
+
+
+      'modals' => [
+    'product' => [
+        'edit_title' => 'Edit Product',
+        'create_title' => 'Create Product',
+        'name_label' => 'Product Name',
+        'company_label' => 'Company',
+        'select_company' => 'Select a company',
+        'images_label' => 'Product Images (max 10)',
+        'images_hint' => 'You can upload up to 10 images',
+        'close_button' => 'Close',
+        'cancel_button' => 'Cancel',
+        'update_button' => 'Update',
+        'save_button' => 'Save'
+    ]
+],
 
 
 ];

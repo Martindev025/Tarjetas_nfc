@@ -11,18 +11,18 @@
      <div class="admin-header">
          <!-- Título a la izquierda -->
          <div class="admin-title">
-             <h2 class="fw-bold text-dark mb-1">PRODUCTOS DE: </h2>
+             <h2 class="fw-bold text-dark mb-1">@lang('messages.products.title') </h2>
              <p class="lead mb-0">{{ $empresa->name }}</p>
          </div>
 
          <!-- Botones a la derecha -->
          <div class="admin-buttons">
 
-             <a href="{{ url()->previous() }}" class="btnf btn__fil custom-action-btn">←
-                 Volver</a>
+             <a href="{{ url()->previous() }}" class="btnf btn__fil custom-action-btn">
+               @lang('messages.products.back_button')</a>
 
              <button class="btnf btn__fil custom-action-btn" data-bs-toggle="modal" data-bs-target="#createProductModal">
-                 <i class="fas fa-plus-circle me-1"></i> Nuevo Producto
+                 <i class="fas fa-plus-circle me-1"></i>@lang('messages.products.new_product_button')
              </button>
          </div>
      </div>
@@ -31,20 +31,20 @@
 
 
      @if ($empresa->products->isEmpty())
-         <p>No hay productos registrados para esta empresa.</p>
+         <p>@lang('messages.products.no_products')</p>
      @else
          <div class="card shadow-sm">
              <div class="card-header bg-white py-3">
-                 <h4 class="mb-0 text-center">Productos</h4>
+                 <h4 class="mb-0 text-center">@lang('messages.products.products_header')</h4>
              </div>
              <div class="card-body p-0">
                  <div class="table-responsive">
                      <table class="table table-hover mb-0" id="productsTable">
                          <thead class="thead-light">
                              <tr>
-                                 <th>Nombre</th>
-                                 <th>Imagenes</th>
-                                 <th class="text-center">Acciones</th>
+                                 <th>@lang('messages.products.table_name')</th>
+                                 <th>@lang('messages.products.table_images')</th>
+                                 <th class="text-center">@lang('messages.products.table_actions')</th>
                              </tr>
                          </thead>
                          <tbody>
@@ -113,7 +113,7 @@
                                              <div class="modal-header py-2">
                                                  <h5 class="modal-title fs-6 w-100 text-center"
                                                      id="productImagesModalLabel{{ $product->id }}">
-                                                     Imágenes de {{ $product->name }}
+                                                     @lang('messages.products.images_modal_title') {{ $product->name }}
                                                  </h5>
                                                  <button type="button" class="btn-close position-absolute end-0 me-2 mt-2"
                                                      data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -138,18 +138,18 @@
                                                              data-bs-slide="prev">
                                                              <span class="carousel-control-prev-icon"
                                                                  aria-hidden="true"></span>
-                                                             <span class="visually-hidden">Anterior</span>
+                                                             <span class="visually-hidden"> @lang('messages.products.carousel_prev')</span>
                                                          </button>
                                                          <button class="carousel-control-next" type="button"
                                                              data-bs-target="#carouselProductImages{{ $product->id }}"
                                                              data-bs-slide="next">
                                                              <span class="carousel-control-next-icon"
                                                                  aria-hidden="true"></span>
-                                                             <span class="visually-hidden">Siguiente</span>
+                                                             <span class="visually-hidden"> @lang('messages.products.carousel_next')</span>
                                                          </button>
                                                      </div>
                                                  @else
-                                                     <p class="text-center">No hay imágenes para este producto.</p>
+                                                     <p class="text-center"> @lang('messages.products.no_images_text').</p>
                                                  @endif
                                              </div>
                                          </div>

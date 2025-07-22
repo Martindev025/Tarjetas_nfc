@@ -62,7 +62,7 @@
                     <div class="row gx-2">
                         <div class="col text-start">
                             <button type="button" class="custom-action-btn" data-bs-dismiss="modal">
-                                Cancelar
+                               @lang('messages.modals.product.cancel_button')
                             </button>
                         </div>
                         <div class="col text-end">

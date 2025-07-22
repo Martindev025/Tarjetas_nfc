@@ -140,22 +140,71 @@ return [
         'clear-filter' => 'Limpiar Filtro',
     ],
 
-    'companies'=>[
-    'title' => 'ADMINISTRACIÓN',
-    'subtitle' => 'Empresas y productos disponibles',
-    'new_company' => 'Nueva Empresa',
-    'new_product' => 'Nuevo Producto',
-    'companies_table_title' => 'Empresas',
-    'company_name' => 'Nombre',
-    'actions' => 'Acciones',
-    'view_products' => 'Ver productos de esta empresa',
-    'edit_company' => 'Editar empresa',
-    'delete_company' => 'Eliminar empresa',
-    'delete_confirmation_title' => '¿Estás seguro?',
-    'delete_confirmation_text' => '¿Deseas eliminar la empresa ":name"?',
-    'delete_button' => 'Sí, eliminar',
-    'cancel_button' => 'Cancelar',
-    'success_message_ok' => 'OK',
-]
+    'companies' => [
+        'title' => 'ADMINISTRACIÓN',
+        'subtitle' => 'Empresas y productos disponibles',
+        'new_company' => 'Nueva Empresa',
+        'new_product' => 'Nuevo Producto',
+        'companies_table_title' => 'Empresas',
+        'company_name' => 'Nombre',
+        'actions' => 'Acciones',
+        'view_products' => 'Ver productos de esta empresa',
+        'edit_company' => 'Editar empresa',
+        'delete_company' => 'Eliminar empresa',
+        'delete_confirmation_title' => '¿Estás seguro?',
+        'delete_confirmation_text' => '¿Deseas eliminar la empresa ":name"?',
+        'delete_button' => 'Sí, eliminar',
+        'cancel_button' => 'Cancelar',
+        'success_message_ok' => 'OK',
+    ],
+
+    // resources/lang/es/products.php
+    'products' => [
+        'title' => 'PRODUCTOS DE:',
+        'no_products' => 'No hay productos registrados para esta empresa.',
+        'products_header' => 'Productos',
+        'table_name' => 'Nombre',
+        'table_images' => 'Imágenes',
+        'table_actions' => 'Acciones',
+        'back_button' => '← Volver',
+        'new_product_button' => 'Nuevo Producto',
+        'images_modal_title' => 'Imágenes de',
+        'no_images_text' => 'No hay imágenes para este producto.',
+        'carousel_prev' => 'Anterior',
+        'carousel_next' => 'Siguiente',
+        'delete_confirm_title' => '¿Estás seguro?',
+        'delete_confirm_text' => 'Vas a eliminar',
+        'delete_confirm_button' => 'Sí, eliminar',
+        'delete_cancel_button' => 'Cancelar',
+        'success_message' => '✅ Operación realizada con éxito',
+    ],
+    'modalsCompany' => [
+        'edit_title' => 'Editar Empresa',
+        'create_title' => 'Crear Empresa',
+        'company_name_label' => 'Nombre de la Empresa',
+        'close_button' => 'Cerrar',
+        'cancel_button' => 'Cancelar',
+        'update_button' => 'Actualizar',
+        'save_button' => 'Guardar'
+
+    ],
+
+   'modals' => [
+    'product' => [
+        'edit_title' => 'Editar Producto',
+        'create_title' => 'Crear Producto',
+        'name_label' => 'Nombre del Producto',
+        'company_label' => 'Empresa',
+        'select_company' => 'Seleccione una empresa',
+        'images_label' => 'Imágenes del Producto (máx 10)',
+        'images_hint' => 'Puedes subir hasta 10 imágenes',
+        'close_button' => 'Cerrar',
+        'cancel_button' => 'Cancelar',
+        'update_button' => 'Actualizar',
+        'save_button' => 'Guardar'
+    ]
+],
+
+
 
 ];

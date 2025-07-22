@@ -166,7 +166,7 @@
                 <p>{{ $nfcCard->cargo }}</p>
             </div>
         </div>
-        <img class="logo" src="{{ asset('img/logo-tecser.png') }}" alt="Logo">
+       
     </div>
 
     <!-- 🔽 CONTENIDO DIVIDIDO EN DOS COLUMNAS -->
