@@ -57,7 +57,7 @@
 </div>
     <div style="margin-left: 2rem">
      <a href="{{ url()->previous() }}" class="custom-action-btn "  >
-    Volver
+    @lang('messages.products.back_button')
 </a>              
 </div>
 </div>

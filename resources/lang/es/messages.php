@@ -205,6 +205,24 @@ return [
     ]
 ],
 
+ 'add_card_title' => 'AGREGAR TARJETA',
+    'form' => [
+        'name' => 'Nombre',
+        'phone' => 'Celular',
+        'city' => 'Ciudad - Municipio',
+        'position' => 'Cargo',
+        'company' => 'Empresa',
+        'select_products' => 'Seleccionar productos',
+        'optional_phone' => 'Celular 2 (opcional)',
+        'email' => 'Correo electrónico',
+        'optional_email' => 'Correo electrónico 2 (opcional)',
+        'website' => 'Página (opcional)',
+        'data_consent' => 'Acepto el <a href=":link" target="_blank">(Leer política de datos)</a>',
+        'cancel' => 'Cancelar',
+        'save' => 'Guardar'
+    ]
+
+
 
 
 ];

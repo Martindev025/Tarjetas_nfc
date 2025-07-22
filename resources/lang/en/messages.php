@@ -203,5 +203,21 @@ return [
     ]
 ],
 
+ 'add_card_title' => 'ADD CARD',
+    'form' => [
+        'name' => 'Name',
+        'phone' => 'Phone',
+        'city' => 'City - Municipality',
+        'position' => 'Position',
+        'company' => 'Company',
+        'select_products' => 'Select products',
+        'optional_phone' => 'Phone 2 (optional)',
+        'email' => 'Email',
+        'optional_email' => 'Email 2 (optional)',
+        'website' => 'Website (optional)',
+        'data_consent' => 'I accept the <a href=":link" target="_blank">(Read data policy)</a>',
+        'cancel' => 'Cancel',
+        'save' => 'Save'
+    ]
 
 ];
