@@ -126,18 +126,26 @@
 @endif
 </div>
 <script>
+    // Pasar traducciones de Laravel a variables JS
+    const swalTitle = @json(trans('messages.delete_confirm.title'));
+    const swalText = @json(trans('messages.delete_confirm.text'));
+    const swalConfirm = @json(trans('messages.delete_confirm.confirm'));
+    const swalCancel = @json(trans('messages.delete_confirm.cancel'));
+</script>
+
+<script>
     let table = new DataTable('#myTable');
 
-     function confirmDelete(id) {
+    function confirmDelete(id) {
         Swal.fire({
-            title: '{{ __("¿Estás seguro?") }}',
-            text: '{{ __("messages.index.delete") }}',
+            title: swalTitle,
+            text: swalText,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: '{{ __("Sí, eliminar") }}',
-            cancelButtonText: '{{ __("Cancelar") }}'
+            confirmButtonText: swalConfirm,
+            cancelButtonText: swalCancel
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('delete-form-' + id).submit();
@@ -145,13 +153,13 @@
         });
     }
 
-     setTimeout(function () {
+    setTimeout(function () {
         let alerts = document.querySelectorAll('.fade-out-error');
         alerts.forEach(function(alert) {
             alert.style.transition = "opacity 0.5s ease-out";
             alert.style.opacity = "0";
             setTimeout(() => alert.remove(), 500);
         });
-    }, 5000); // 
+    }, 5000);
 </script>
 @endsection

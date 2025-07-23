@@ -17,7 +17,7 @@ return [
         'es' => 'Español',
         'en' => 'Ingles',
         'close' => 'Cerrar sesión',
-        'event' => 'Eventos',
+        'event' => 'Proyectos',
     ],
 
     'attributes' => [
@@ -156,6 +156,10 @@ return [
         'delete_button' => 'Sí, eliminar',
         'cancel_button' => 'Cancelar',
         'success_message_ok' => 'OK',
+        'success_message_ok' => 'OK',
+        'delete_product_text' => 'Vas a eliminar :name',
+        'delete_company_text' => '¿Deseas eliminar la empresa ":name"?',
+        'success_message_ok' => 'OK',
     ],
 
     // resources/lang/es/products.php
@@ -177,6 +181,11 @@ return [
         'delete_confirm_button' => 'Sí, eliminar',
         'delete_cancel_button' => 'Cancelar',
         'success_message' => '✅ Operación realizada con éxito',
+        'created_successfully' => '✅ Producto creado con éxito',
+        'updated_successfully' => '✅ Producto actualizado con éxito',
+        'cannot_delete_with_products' => 'No puedes eliminar la empresa porque tiene productos asociados.',
+        'cannot_delete_with_events' => 'No se puede eliminar la empresa porque está asociada a uno o más eventos.',
+        'deleted_successfully' => '✅ Empresa eliminada con éxito',
     ],
     'modalsCompany' => [
         'edit_title' => 'Editar Empresa',
@@ -189,23 +198,23 @@ return [
 
     ],
 
-   'modals' => [
-    'product' => [
-        'edit_title' => 'Editar Producto',
-        'create_title' => 'Crear Producto',
-        'name_label' => 'Nombre del Producto',
-        'company_label' => 'Empresa',
-        'select_company' => 'Seleccione una empresa',
-        'images_label' => 'Imágenes del Producto (máx 10)',
-        'images_hint' => 'Puedes subir hasta 10 imágenes',
-        'close_button' => 'Cerrar',
-        'cancel_button' => 'Cancelar',
-        'update_button' => 'Actualizar',
-        'save_button' => 'Guardar'
-    ]
-],
+    'modals' => [
+        'product' => [
+            'edit_title' => 'Editar Producto',
+            'create_title' => 'Crear Producto',
+            'name_label' => 'Nombre del Producto',
+            'company_label' => 'Empresa',
+            'select_company' => 'Seleccione una empresa',
+            'images_label' => 'Imágenes del Producto (máx 10)',
+            'images_hint' => 'Puedes subir hasta 10 imágenes',
+            'close_button' => 'Cerrar',
+            'cancel_button' => 'Cancelar',
+            'update_button' => 'Actualizar',
+            'save_button' => 'Guardar'
+        ]
+    ],
 
- 'add_card_title' => 'AGREGAR TARJETA',
+    'add_card_title' => 'AGREGAR TARJETA',
     'form' => [
         'name' => 'Nombre',
         'phone' => 'Celular',
@@ -220,8 +229,39 @@ return [
         'data_consent' => 'Acepto el <a href=":link" target="_blank">(Leer política de datos)</a>',
         'cancel' => 'Cancelar',
         'save' => 'Guardar'
-    ]
+    ],
 
+    'delete_confirm' => [
+        'title' => '¿Estás seguro?',
+        'text' => 'Esta acción no se puede deshacer.',
+        'confirm' => 'Sí, eliminar',
+        'cancel' => 'Cancelar',
+    ],
+
+    'edit_card_modal' => [
+        'title' => 'EDITAR TARJETA',
+        'name' => 'Nombre',
+        'cellphone' => 'Celular',
+        'city' => 'Ciudad - Municipio',
+        'position' => 'Cargo',
+        'company' => 'Empresa',
+        'optional_cellphone' => 'Celular 2 (opcional)',
+        'email' => 'Correo electrónico',
+        'optional_email' => 'Correo electrónico 2 (opcional)',
+        'website' => 'Página (opcional)',
+        'feature' => 'Imagen destacada',
+        'authorization_label' => '¿AUTORIZA EL TRATAMIENTO DE SUS DATOS?',
+        'authorization_link' => '(Leer tratamiento de datos)',
+        'cancel' => 'Cancelar',
+        'save' => 'Guardar',
+    ],
+
+    'events' => [
+        'cannot_delete_with_cards' => '⚠️ No se puede eliminar el proyecto porque tiene tarjetas asociadas.',
+        'deleted_successfully' => '✅  Proyecto eliminado correctamente.',
+        'created_successfully' => '✅ Proyecto creado correctamente.',
+        'updated_successfully' => '✅ Proyecto actualizado correctamente.',
+    ],
 
 
 

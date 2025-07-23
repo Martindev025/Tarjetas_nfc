@@ -37,16 +37,16 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255|unique:companies,name',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:companies,name',
+        ]);
 
-    Company::create(['name' => $request->input('name')]);
+        Company::create(['name' => $request->input('name')]);
 
-    return redirect()->route('products.indexProdCom')->with('success', 'Empresa creada con éxito.');
-}
+        return redirect()->route('products.indexProdCom')->with('success', __('messages.companies.created_successfully'));
+    }
 
     /**
      * Display the specified resource.
@@ -67,36 +67,36 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, Company $company)
-{
-    $request->validate([
-        'name' => 'required|string|max:255|unique:companies,name,' . $company->id,
-    ]);
+    public function update(Request $request, Company $company)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:companies,name,' . $company->id,
+        ]);
 
-    $company->update(['name' => $request->name]);
+        $company->update(['name' => $request->name]);
 
-    return redirect()->back()->with('success', 'Empresa actualizada correctamente.');
-}
+        return redirect()->back()->with('success', __('messages.companies.updated_successfully'));
+    }
 
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(Company $company)
-{
-    // Verificar si tiene productos asociados
-    if ($company->products()->count() > 0) {
-        return redirect()->back()->with('error', 'No puedes eliminar la empresa porque tiene productos asociados.');
+    {
+        // Verificar si tiene productos asociados
+        if ($company->products()->count() > 0) {
+            return redirect()->back()->with('error', __('messages.companies.cannot_delete_with_products'));
+        }
+
+        // Verificar si tiene eventos asociados
+        if ($company->events()->exists()) {
+            return redirect()->back()->with('error', __('messages.companies.cannot_delete_with_events'));
+        }
+
+        // Eliminar la empresa si no tiene productos ni eventos
+        $company->delete();
+
+        return redirect()->route('products.indexProdCom')->with('success', __('messages.companies.deleted_successfully'));
     }
-
-    // Verificar si tiene eventos asociados
-    if ($company->events()->exists()) {
-        return redirect()->back()->with('error', 'No se puede eliminar la empresa porque está asociada a uno o más eventos.');
-    }
-
-    // Eliminar la empresa si no tiene productos ni eventos
-    $company->delete();
-
-    return redirect()->route('products.indexProdCom')->with('success', 'Empresa eliminada con éxito');
-}
-
 }

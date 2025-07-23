@@ -140,9 +140,18 @@
         </div>
     </div>
 
-   
+
     </div>
 
+    <script>
+        // Traducciones para SweetAlert
+        const swalTitle = @json(__('messages.delete_confirm.title'));
+        const swalDeleteProductText = @json(__('messages.companies.delete_product_text')); // Debes agregar esta clave
+        const swalDeleteCompanyText = @json(__('messages.companies.delete_company_text')); // Debes agregar esta clave
+        const swalConfirm = @json(__('messages.delete_confirm.confirm'));
+        const swalCancel = @json(__('messages.delete_confirm.cancel'));
+        const swalOk = @json(__('messages.companies.success_message_ok', [], 'es')); // O usa 'OK' literal si prefieres
+    </script>
     {{-- Scripts para DataTables --}}
     <script>
         let table = new DataTable('#productsTable');
@@ -157,14 +166,14 @@
                     const productName = this.dataset.productName || 'este elemento';
 
                     Swal.fire({
-                        title: '¿Estás seguro?',
-                        text: `Vas a eliminar ${productName}`,
+                        title: swalTitle,
+                        text: swalDeleteProductText.replace(':name', productName),
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
                         cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Sí, eliminar',
-                        cancelButtonText: 'Cancelar'
+                        confirmButtonText: swalConfirm,
+                        cancelButtonText: swalCancel
                     }).then((result) => {
                         if (result.isConfirmed) {
                             document.getElementById(formId).submit();
@@ -178,7 +187,7 @@
                 Swal.fire({
                     text: "{{ session('alert_message') }}",
                     icon: "{{ Str::contains(session('alert_message'), '✅') ? 'success' : 'warning' }}",
-                    confirmButtonText: 'OK',
+                    confirmButtonText: swalOk,
                     customClass: {
                         confirmButton: 'btn btn-primary'
                     },
@@ -187,22 +196,20 @@
             @endif
         });
 
-
-
         document.querySelectorAll('.btn-delete-company').forEach(button => {
             button.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
                 const name = this.getAttribute('data-name');
 
                 Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: `¿Deseas eliminar la empresa "${name}"?`,
+                    title: swalTitle,
+                    text: swalDeleteCompanyText.replace(':name', name),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
+                    confirmButtonText: swalConfirm,
+                    cancelButtonText: swalCancel
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById(`deleteCompanyForm${id}`).submit();

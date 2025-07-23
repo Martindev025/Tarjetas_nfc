@@ -33,7 +33,8 @@
         <div class="row justify-content-center col-md-10">
             <section class="d-flex align-items-center justify-content-between mb-3">
                 <div>
-                    <h2 style="margin:0; font-weight:700; color:#222; letter-spacing:1px;">{{ trans('messages.index-event.title1') }}</h2>
+                    <h2 style="margin:0; font-weight:700; color:#222; letter-spacing:1px;">
+                        {{ trans('messages.index-event.title1') }}</h2>
                     <div class="card-event">{{ trans('messages.index-event.title') }}</div>
                 </div>
                 <div class="d-flex gap-2">
@@ -45,7 +46,7 @@
 
                     <a href="{{ route('products.index') }}" class="btnf btn__fil custom-action-btn">
                         <i class="fa-solid fa-building" style="margin-right: 6px;"></i>
-                       {{ trans('messages.index-event.empresa') }}
+                        {{ trans('messages.index-event.empresa') }}
                     </a>
 
 
@@ -106,74 +107,78 @@
 
 
 
-   <div class="row justify-content-center mb-5">
-    <div class="col-md-9 custom-box">
-        <div class="card">
-            <div class="card-body">
-                <table class="table" id="eventsTable">
-                    <thead>
-                        <tr>
-                            <th>{{ trans('messages.index-event.name') }}</th>
-                            <th>{{ trans('messages.index-event.date') }}</th>
-                            <th class="text-center">{{ trans('messages.index-event.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($events as $event)
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-9 custom-box">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table" id="eventsTable">
+                        <thead>
                             <tr>
-                                <td>{{ $event->name }}</td>
-                                <td>{{ $event->fecha }}</td>
-                                <td class="text-center">
-                                    <div class="d-flex justify-content-center gap-3">
-                                        <!-- View -->
-                                        <a href="{{ route('events.nfc-cards', $event->id) }}" class="text-decoration-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" color="black" class="bi bi-eye-fill"
-                                                viewBox="0 0 16 16">
-                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                                                <path
-                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                                            </svg>
-                                        </a>
-                                        <!-- Edit -->
-                                        <a data-bs-toggle="modal" data-bs-target="#editEventModal{{ $event->id }}" class="text-decoration-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                            </svg>
-                                        </a>
-                                        <!-- Delete -->
-                                        <form id="delete-form-{{ $event->id }}"
-                                            action="{{ route('events.destroy', $event) }}" method="POST"
-                                            style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" onclick="confirmDelete({{ $event->id }})"
-                                                style="outline: none; border: none; background: transparent; padding: 0;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1
-                                                    .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1
-                                                    1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4
-                                                    4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th>{{ trans('messages.index-event.name') }}</th>
+                                <th>{{ trans('messages.index-event.date') }}</th>
+                                <th class="text-center">{{ trans('messages.index-event.actions') }}</th>
                             </tr>
-                            @include('events.edit', ['event' => $event])
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($events as $event)
+                                <tr>
+                                    <td>{{ $event->name }}</td>
+                                    <td>{{ $event->fecha }}</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-3">
+                                            <!-- View -->
+                                            <a href="{{ route('events.nfc-cards', $event->id) }}"
+                                                class="text-decoration-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="currentColor" color="black" class="bi bi-eye-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                                    <path
+                                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                                                </svg>
+                                            </a>
+                                            <!-- Edit -->
+                                            <a data-bs-toggle="modal" data-bs-target="#editEventModal{{ $event->id }}"
+                                                class="text-decoration-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                </svg>
+                                            </a>
+                                            <!-- Delete -->
+                                            <form id="delete-form-{{ $event->id }}"
+                                                action="{{ route('events.destroy', $event) }}" method="POST"
+                                                style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onclick="confirmDelete({{ $event->id }})"
+                                                    style="outline: none; border: none; background: transparent; padding: 0;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1
+                                                        .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                        <path
+                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1
+                                                        1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4
+                                                        4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @include('events.edit', ['event' => $event])
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <!-- Botón para abrir el modal -->
 
     <!-- Modal -->
@@ -211,7 +216,14 @@
             </div>
         </div>
     </div>
-
+    
+     <script>
+    // Definir variables JS con las traducciones de Laravel
+    const swalTitle = @json(trans('messages.delete_confirm.title'));
+    const swalText = @json(trans('messages.delete_confirm.text'));
+    const swalConfirm = @json(trans('messages.delete_confirm.confirm'));
+    const swalCancel = @json(trans('messages.delete_confirm.cancel'));
+</script>
 
     <script>
         let table = new DataTable('#eventsTable');
@@ -225,17 +237,16 @@
             }
         });
 
-
         function confirmDelete(eventId) {
             Swal.fire({
-                title: '¿Estás seguro?',
-                text: 'Esta acción no se puede deshacer.',
+                title: swalTitle,
+                text: swalText,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
+                confirmButtonText: swalConfirm,
+                cancelButtonText: swalCancel
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(`delete-form-${eventId}`).submit();

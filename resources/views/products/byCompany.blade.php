@@ -169,44 +169,51 @@
 
      @include('products.modalProduct', ['product' => null, 'isEdit' => false, 'companies' => $companies])
      <script>
-         let table = new DataTable('#productsTable');
-         document.addEventListener('DOMContentLoaded', function() {
-             const deleteButtons = document.querySelectorAll('.btn-delete');
+    // Pasar traducciones de Laravel a variables JS
+    const swalTitle = @json(__('messages.delete_confirm.title'));
+    const swalDeleteProductText = @json(__('messages.companies.delete_product_text'));
+    const swalConfirm = @json(__('messages.delete_confirm.confirm'));
+    const swalCancel = @json(__('messages.delete_confirm.cancel'));
+    const swalOk = @json(__('messages.companies.success_message_ok', [], 'es')); // O usa 'OK' literal si prefieres
 
-             deleteButtons.forEach(button => {
-                 button.addEventListener('click', function() {
-                     const formId = this.dataset.formId;
-                     const productName = this.dataset.productName || 'este elemento';
+    let table = new DataTable('#productsTable');
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.btn-delete');
 
-                     Swal.fire({
-                         title: '¿Estás seguro?',
-                         text: `Vas a eliminar ${productName}`,
-                         icon: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#d33',
-                         cancelButtonColor: '#3085d6',
-                         confirmButtonText: 'Sí, eliminar',
-                         cancelButtonText: 'Cancelar'
-                     }).then((result) => {
-                         if (result.isConfirmed) {
-                             document.getElementById(formId).submit();
-                         }
-                     });
-                 });
-             });
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const formId = this.dataset.formId;
+                const productName = this.dataset.productName || 'este elemento';
 
-             @if (session('alert_message'))
-                 Swal.fire({
-                     text: "{{ session('alert_message') }}",
-                     icon: "{{ Str::contains(session('alert_message'), '✅') ? 'success' : 'warning' }}",
-                     confirmButtonText: 'OK',
-                     customClass: {
-                         confirmButton: 'btn btn-primary'
-                     },
-                     buttonsStyling: false
-                 });
-             @endif
-         });
-     </script>
+                Swal.fire({
+                    title: swalTitle,
+                    text: swalDeleteProductText.replace(':name', productName),
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: swalConfirm,
+                    cancelButtonText: swalCancel
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit();
+                    }
+                });
+            });
+        });
+
+        @if (session('alert_message'))
+            Swal.fire({
+                text: "{{ session('alert_message') }}",
+                icon: "{{ Str::contains(session('alert_message'), '✅') ? 'success' : 'warning' }}",
+                confirmButtonText: swalOk,
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        @endif
+    });
+</script>
 
  @endsection

@@ -36,7 +36,7 @@ class EventController extends Controller
 
     $event->companies()->attach($request->companies);
 
-    return redirect()->route('events.index')->with('success', 'Evento creado correctamente.');
+   return redirect()->route('events.index')->with('success', __('messages.events.created_successfully'));
 }
 
     // Método para mostrar la lista de eventos
@@ -82,18 +82,19 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->fecha = $request->input('fecha');
         $event->save();
-        return redirect()->route('events.index')->with('success', 'Evento actualizado correctamente.');
+       return redirect()->route('events.index')->with('success', __('messages.events.updated_successfully'));
     }
 
     // Método para eliminar un evento
-   public function destroy(Event $event)
+
+public function destroy(Event $event)
 {
     if ($event->nfcCards()->exists()) {
-        return back()->with('alert_message', '⚠️ No se puede eliminar el evento porque tiene tarjetas asociadas.');
+        return back()->with('alert_message', __('messages.events.cannot_delete_with_cards'));
     }
 
     $event->delete();
-    return back()->with('alert_message', '✅ Evento eliminado correctamente.');
+    return back()->with('alert_message', __('messages.events.deleted_successfully'));
 }
     public function createNfcCard(Event $event)
 {

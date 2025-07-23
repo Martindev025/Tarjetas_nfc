@@ -58,7 +58,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('products.indexProdCom')->with('success', 'Producto creado con éxito');
+        return redirect()->route('products.indexProdCom')->with('success', __('messages.products.created_successfully'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ProductController extends Controller
             'company_id' => $request->company_id
         ]);
 
-        return redirect()->route('products.indexProdCom')->with('success', 'Producto actualizado con éxito');
+       return redirect()->route('products.indexProdCom')->with('success', __('messages.products.updated_successfully'));
     }
 
     /**
@@ -102,7 +102,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('products.indexProdCom')->with('success', 'Producto eliminado con éxito');
+       return redirect()->route('products.indexProdCom')->with('success', __('messages.products.deleted_successfully'));
     }
 
     public function showByCompany($empresaId)
