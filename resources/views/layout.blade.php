@@ -179,7 +179,7 @@
 <body>
 
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg custom-navbar position-fixed">
+    <nav class="navbar navbar-expand-lg custom-navbar position-fixed ">
         <div class="container d-flex align-items-center justify-content-between">
 
             <!-- Logo Izquierda -->

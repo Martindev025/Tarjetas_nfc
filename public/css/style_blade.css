@@ -18,6 +18,11 @@
   padding: 0;
   box-sizing: inherit;
 }
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 70px; /* Ajusta este valor a la altura real de tu navbar */
+}
 
 body {
   background-color: #E4EBF5;
@@ -31,7 +36,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  padding-top: 70px !important;
+ 
 
 
 }
@@ -86,7 +91,8 @@ main {
 
 /* ASEGURAR QUE NADA SE SUPERPONGA */
 .custom-navbar {
-  transform: translateZ(0);
+
+  margin-bottom: 3rem;
   /* Crea nuevo contexto de apilamiento */
 }
 
