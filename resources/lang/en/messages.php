@@ -261,4 +261,18 @@ return [
         'created_successfully' => '✅ Project created successfully.',
         'updated_successfully' => '✅ Project updated successfully.',
     ],
+
+    'nfc_cards' => [
+        'success_title' => 'Success!',
+        'created_successfully' => 'The card was created successfully.',
+
+    ],
+
+    'validation' => [
+        'title' => 'Validation errors',
+        'close' => 'Close',
+    ],
+    'error' => [
+        'title' => 'Error!',
+    ],
 ];

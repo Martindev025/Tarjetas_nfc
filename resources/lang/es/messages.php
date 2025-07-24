@@ -263,6 +263,20 @@ return [
         'updated_successfully' => '✅ Proyecto actualizado correctamente.',
     ],
 
+    'nfc_cards' => [
+        'success_title' => '¡Éxito!',
+        'created_successfully' => 'La tarjeta fue creada correctamente.',
+
+    ],
+
+    'validation' => [
+        'title' => 'Errores de validación',
+        'close' => 'Cerrar',
+    ],
+    'error' => [
+        'title' => '¡Error!',
+    ],
+
 
 
 ];

@@ -291,7 +291,7 @@
     <script>
         Swal.fire({
             icon: 'success',
-            title: '¡Éxito!',
+            title:  "{{ session('success_title') ?? __('messages.nfc_cards.success_title') }}",
             text: '{{ session('success') }}',
             confirmButtonColor: '#3085d6'
         });
